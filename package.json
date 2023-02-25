@@ -1,0 +1,9 @@
+{
+  "name": "reactea",
+  "version": "1.0.0",
+  "description": "React with a cup of tea.",
+  "license": "ISC",
+  "workspaces": [
+    "packages/base"
+  ]
+}
