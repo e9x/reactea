@@ -11,6 +11,8 @@
     "./consts": "./dist/consts.js",
     "./base": "./dist/base.js",
     "./css": "./dist/css.js",
+    "./js": "./dist/js.js",
+    "./svg": "./dist/svg.js",
     "./css-loader": {
       "types": "./css-loader.d.ts"
     }
