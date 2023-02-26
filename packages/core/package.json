@@ -1,5 +1,5 @@
 {
-  "name": "@reactea/config",
+  "name": "@reactea/core",
   "version": "1.0.0",
   "description": "SASS/SCSS support for Reactea.",
   "author": "",
@@ -7,9 +7,6 @@
   "main": "dist/index.js",
   "exports": {
     ".": "./dist/index.js",
-    "./env": "./dist/env.js",
-    "./consts": "./dist/consts.js",
-    "./base": "./dist/base.js",
     "./css": "./dist/css.js",
     "./js": "./dist/js.js",
     "./svg": "./dist/svg.js",
@@ -23,8 +20,13 @@
     "build": "tsc",
     "watch": "tsc --watch"
   },
+  "files": [
+    "dist",
+    "css-loader.d.ts"
+  ],
   "dependencies": {
     "@pmmmwh/react-refresh-webpack-plugin": "^0.5.10",
+    "@reactea/config": "^1.0.0",
     "@svgr/webpack": "^6.5.1",
     "@swc/core": "^1.3.36",
     "@umijs/case-sensitive-paths-webpack-plugin": "^1.0.1",
@@ -41,12 +43,10 @@
     "postcss-preset-env": "^8.0.1",
     "react-dev-utils": "^12.0.1",
     "resolve-url-loader": "^5.0.0",
-    "source-map-loader": "^4.0.1",
     "style-loader": "^3.3.1",
     "swc-loader": "^0.2.3",
     "webpack": "^5.75.0",
-    "webpack-bundle-analyzer": "^4.8.0",
-    "webpack-dev-server": "^4.11.1"
+    "webpack-bundle-analyzer": "^4.8.0"
   },
   "devDependencies": {
     "@ianvs/prettier-plugin-sort-imports": "^3.7.1",

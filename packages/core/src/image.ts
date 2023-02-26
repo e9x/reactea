@@ -1,4 +1,4 @@
-import { createConfig } from "./index.js";
+import { createConfig } from "@reactea/config";
 
 export const imageInlineSizeLimit = parseInt(
   process.env.IMAGE_INLINE_SIZE_LIMIT || "10000"

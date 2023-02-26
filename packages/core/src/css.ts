@@ -1,7 +1,11 @@
 import type { CSSLoaderOptions } from "../css-loader.js";
-import { isDevelopment, shouldUseSourceMap, appDir } from "./consts.js";
-import type { ReacteaConfig } from "./index.js";
-import { createConfig } from "./index.js";
+import type { ReacteaConfig } from "@reactea/config";
+import { createConfig } from "@reactea/config";
+import {
+  isDevelopment,
+  shouldUseSourceMap,
+  appDir,
+} from "@reactea/config/consts";
 import CssMinimizerPlugin from "css-minimizer-webpack-plugin";
 import MiniCssExtractPlugin from "mini-css-extract-plugin";
 import { createRequire } from "node:module";

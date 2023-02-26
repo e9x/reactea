@@ -1,11 +1,11 @@
+import { createConfig } from "@reactea/config";
 import {
   emitErrorsAsWarnings,
   isDevelopment,
   shouldLint,
   appDir,
-} from "./consts.js";
-import { envRawStringified } from "./env.js";
-import { createConfig } from "./index.js";
+} from "@reactea/config/consts";
+import { envRawStringified } from "@reactea/config/env";
 import CaseSensitivePathsPlugin from "@umijs/case-sensitive-paths-webpack-plugin";
 import { CleanWebpackPlugin } from "clean-webpack-plugin";
 import ESLintWebpackPlugin from "eslint-webpack-plugin";
@@ -24,7 +24,7 @@ export default function coreConfig() {
       // the requesting resource.
       new ModuleNotFoundPlugin(resolve(".")),
       // Makes some environment variables available to the JS code, for example:
-      // if (process.env.NODE_ENV === 'production') { ... }. See `./env.js`.
+      // if (process.env.NODE_ENV === 'production') { ... }. See `@reactea/config/env`.
       // It is absolutely essential that NODE_ENV is set to production
       // during a production build.
       // Otherwise React will be compiled in the very slow development mode.

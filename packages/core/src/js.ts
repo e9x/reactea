@@ -1,12 +1,12 @@
+import ReactRefreshWebpackPlugin from "@pmmmwh/react-refresh-webpack-plugin";
+import { createConfig } from "@reactea/config";
 import {
   isDevelopment,
   shouldLint,
   shouldUseReactRefresh,
   shouldUseSourceMap,
   appDir,
-} from "./consts.js";
-import { createConfig } from "./index.js";
-import ReactRefreshWebpackPlugin from "@pmmmwh/react-refresh-webpack-plugin";
+} from "@reactea/config/consts";
 import type { JsMinifyOptions } from "@swc/core";
 import ForkTsCheckerWebpackPlugin from "fork-ts-checker-webpack-plugin";
 import { createRequire } from "node:module";

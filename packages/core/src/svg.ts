@@ -1,4 +1,4 @@
-import { createConfig } from "./index.js";
+import { createConfig } from "@reactea/config";
 import { createRequire } from "node:module";
 
 const require = createRequire(import.meta.url);

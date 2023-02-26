@@ -1,6 +1,10 @@
-import { isDevelopment, shouldInlineRuntimeChunk, appDir } from "./consts.js";
-import { envRaw } from "./env.js";
-import { createConfig } from "./index.js";
+import { createConfig } from "@reactea/config";
+import {
+  isDevelopment,
+  shouldInlineRuntimeChunk,
+  appDir,
+} from "@reactea/config/consts";
+import { envRaw } from "@reactea/config/env";
 import HtmlWebpackPlugin from "html-webpack-plugin";
 import { join } from "node:path";
 import InlineChunkHtmlPlugin from "react-dev-utils/InlineChunkHtmlPlugin.js";
