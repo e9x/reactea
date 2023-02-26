@@ -1,7 +1,6 @@
 import "webpack-dev-server";
 import {
   isDevelopment,
-  isEnvProductionProfile,
   shouldUseSourceMap,
   appDir,
   entryPoint,
@@ -29,21 +28,47 @@ export interface ReacteaConfig {
     | WebpackPluginInstance
     | "..."
   )[];
+  resolve: {
+    extensions: string[];
+    alias: {
+      /**
+       * New request.
+       */
+      alias: string | false | string[];
+      /**
+       * Request to be redirected.
+       */
+      name: string;
+      /**
+       * Redirect only exact matching request.
+       */
+      onlyModule?: boolean;
+    }[];
+  };
 }
 
-export function createConfig(
-  config: Partial<ReacteaConfig> = {}
-): ReacteaConfig {
+interface PartialReacteaConfig extends Partial<Omit<ReacteaConfig, "resolve">> {
+  resolve?: Partial<ReacteaConfig["resolve"]>;
+}
+
+export function createConfig(config: PartialReacteaConfig = {}): ReacteaConfig {
   return {
     oneOf: config.oneOf || [],
     plugins: config.plugins || [],
     minimizers: config.minimizers || [],
+    resolve: {
+      alias: config.resolve?.alias || [],
+      extensions: config.resolve?.extensions || [],
+    },
   };
 }
 
 export function extendConfig(config: ReacteaConfig, extension: ReacteaConfig) {
   config.oneOf.push(...extension.oneOf);
   config.plugins.push(...extension.plugins);
+  config.minimizers.push(...extension.minimizers);
+  config.resolve.alias.push(...extension.resolve.alias);
+  config.resolve.extensions.push(...extension.resolve.extensions);
 }
 
 export function compileConfig(reacteaConfig: ReacteaConfig) {
@@ -97,17 +122,8 @@ export function compileConfig(reacteaConfig: ReacteaConfig) {
       // https://github.com/facebook/create-react-app/issues/290
       // `web` extension prefixes have been added for better support
       // for React Native Web.
-      extensions: [".mjs", ".js", ".ts", ".tsx", ".json", ".jsx"],
-      alias: {
-        // Support React Native Web
-        // https://www.smashingmagazine.com/2016/08/a-glimpse-into-the-future-with-react-native-for-web/
-        "react-native": "react-native-web",
-        // Allows for better profiling with ReactDevTools
-        ...(isEnvProductionProfile && {
-          "react-dom$": "react-dom/profiling",
-          "scheduler/tracing": "scheduler/tracing-profiling",
-        }),
-      },
+      extensions: reacteaConfig.resolve.extensions,
+      alias: reacteaConfig.resolve.alias,
     },
     optimization: {
       minimize: !isDevelopment,

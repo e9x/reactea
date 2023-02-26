@@ -6,6 +6,7 @@ import {
   shouldUseReactRefresh,
   shouldUseSourceMap,
   appDir,
+  isEnvProductionProfile,
 } from "@reactea/config/consts";
 import type { JsMinifyOptions } from "@swc/core";
 import ForkTsCheckerWebpackPlugin from "fork-ts-checker-webpack-plugin";
@@ -78,5 +79,39 @@ export default function jsConfig() {
         minify: TerserPlugin.swcMinify,
       }),
     ],
+    resolve: {
+      alias: [
+        // Support React Native Web
+
+        // https://www.smashingmagazine.com/2016/08/a-glimpse-into-the-future-with-react-native-for-web/
+        {
+          name: "react-native",
+          alias: "react-native-web",
+        },
+        // Allows for better profiling with ReactDevTools
+        ...(isEnvProductionProfile
+          ? [
+              { name: "react-dom$", alias: "react-dom/profiling" },
+              {
+                name: "scheduler/tracing",
+                alias: "scheduler/tracing-profiling",
+              },
+            ]
+          : []),
+      ],
+      extensions: [
+        ".web.mjs",
+        ".mjs",
+        ".web.js",
+        ".js",
+        ".web.ts",
+        ".ts",
+        ".web.tsx",
+        ".tsx",
+        ".json",
+        ".web.jsx",
+        ".jsx",
+      ],
+    },
   });
 }
