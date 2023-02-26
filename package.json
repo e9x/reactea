@@ -4,6 +4,7 @@
   "description": "React with a cup of tea.",
   "license": "ISC",
   "workspaces": [
-    "packages/base"
+    "packages/config",
+    "packages/sass"
   ]
 }

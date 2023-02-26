@@ -1,0 +1,29 @@
+{
+  "name": "@reactea/sass",
+  "version": "1.0.0",
+  "description": "SASS/SCSS support for Reactea.",
+  "author": "",
+  "license": "ISC",
+  "main": "dist/index.js",
+  "type": "module",
+  "scripts": {
+    "build": "tsc",
+    "watch": "tsc --watch"
+  },
+  "dependencies": {
+    "@reactea/config": "^1.0.0",
+    "react-dev-utils": "^12.0.1",
+    "sass": "^1.58.3",
+    "sass-loader": "^13.2.0"
+  },
+  "devDependencies": {
+    "@types/dotenv-flow": "^3.2.0",
+    "@types/node": "^18.14.1",
+    "@types/webpack-bundle-analyzer": "^4.4.2",
+    "eslint": "^8.34.0",
+    "eslint-config-prettier": "^8.6.0",
+    "prettier": "^2.8.4",
+    "react": "^18.2.0",
+    "typescript": "^4.9.5"
+  }
+}

@@ -20,9 +20,36 @@ npm install -D @reactea/base cross-env webpack webpack-cli
 `webpack.config.mjs`
 
 ```js
-import baseConfig from "@reactea/base";
+import { compileConfig } from "@reactea/config";
+import baseConfig from "@reactea/config/base";
 
-// TODO: plugins, etc
+const r = baseConfig();
 
-export default baseConfig;
+// TODO: add more plugins
+
+const config = compileConfig(r);
+
+export default config;
+```
+
+With SCSS support:
+
+```sh
+npm install -D @reactea/sass
+```
+
+`webpack.config.mjs`
+
+```js
+import { compileConfig, extendConfig } from "@reactea/config";
+import baseConfig from "@reactea/config/base";
+import sassConfig from "@reactea/sass";
+
+const r = baseConfig();
+
+extendConfig(r, sassConfig());
+
+const config = compileConfig(r);
+
+export default config;
 ```

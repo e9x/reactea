@@ -10,7 +10,8 @@
     "declaration": true,
     "sourceMap": true,
     "strict": true,
-    "baseUrl": "types",
-    "typeRoots": ["node_modules/@types", "types"]
-  }
+    "baseUrl": "../../types",
+    "typeRoots": ["node_modules/@types", "../../types"]
+  },
+  "include": ["src/**/*.ts", "../../types/**/*"]
 }
