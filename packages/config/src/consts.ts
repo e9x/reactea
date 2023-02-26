@@ -14,10 +14,6 @@ export const shouldInlineRuntimeChunk =
 
 export const emitErrorsAsWarnings = process.env.ESLINT_NO_DEV_ERRORS === "true";
 
-export const imageInlineSizeLimit = parseInt(
-  process.env.IMAGE_INLINE_SIZE_LIMIT || "10000"
-);
-
 export const isDevelopment = process.env.NODE_ENV !== "production";
 
 // Variable used for enabling profiling in Production
