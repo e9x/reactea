@@ -1,7 +1,8 @@
-import type { ReacteaConfig } from "@reactea/config";
-import { getStyleLoaders, shouldUseSourceMap } from "@reactea/config/base";
-import getCSSModuleLocalIdent from "react-dev-utils/getCSSModuleLocalIdent.js";
+import { createConfig, ReacteaConfig } from "@reactea/config";
+import { shouldUseSourceMap } from "@reactea/config/base";
+import { getStyleLoaders } from "@reactea/config/css";
 import { createRequire } from "node:module";
+import getCSSModuleLocalIdent from "react-dev-utils/getCSSModuleLocalIdent.js";
 
 const require = createRequire(import.meta.url);
 
@@ -9,7 +10,7 @@ const sassRegex = /\.(scss|sass)$/;
 const sassModuleRegex = /\.module\.(scss|sass)$/;
 
 export default function sassConfig(): ReacteaConfig {
-  return {
+  return createConfig({
     oneOf: [
       // Opt-in support for SASS (using .scss or .sass extensions).
       // By default we support SASS Modules with the
@@ -62,6 +63,5 @@ export default function sassConfig(): ReacteaConfig {
         ),
       },
     ],
-    plugins: [],
-  };
+  });
 }

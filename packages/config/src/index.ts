@@ -1,22 +1,20 @@
 import "webpack-dev-server";
+import {
+  imageInlineSizeLimit,
+  isDevelopment,
+  isEnvProductionProfile,
+  shouldUseSourceMap,
+} from "./base.js";
+import { appDir, entryPoint } from "./consts.js";
 import { envRawHash } from "./env.js";
+import { createRequire } from "node:module";
+import { join } from "node:path";
 import type {
   Compiler,
   RuleSetRule,
   WebpackPluginInstance,
   Configuration,
 } from "webpack";
-import TerserPlugin from "terser-webpack-plugin";
-import CssMinimizerPlugin from "css-minimizer-webpack-plugin";
-import { appDir, entryPoint } from "./consts.js";
-import { JsMinifyOptions } from "@swc/core";
-import {
-  isDevelopment,
-  isEnvProductionProfile,
-  shouldUseSourceMap,
-} from "./base.js";
-import { join } from "node:path";
-import { createRequire } from "node:module";
 
 const require = createRequire(import.meta.url);
 
@@ -26,6 +24,21 @@ export interface ReacteaConfig {
     | ((this: Compiler, compiler: Compiler) => void)
     | WebpackPluginInstance
   )[];
+  minimizers: (
+    | ((this: Compiler, compiler: Compiler) => void)
+    | WebpackPluginInstance
+    | "..."
+  )[];
+}
+
+export function createConfig(
+  config: Partial<ReacteaConfig> = {}
+): ReacteaConfig {
+  return {
+    oneOf: config.oneOf || [],
+    plugins: config.plugins || [],
+    minimizers: config.minimizers || [],
+  };
 }
 
 export function extendConfig(config: ReacteaConfig, extension: ReacteaConfig) {
@@ -98,12 +111,7 @@ export function compileConfig(reacteaConfig: ReacteaConfig) {
     },
     optimization: {
       minimize: !isDevelopment,
-      minimizer: [
-        new TerserPlugin<JsMinifyOptions>({
-          minify: TerserPlugin.swcMinify,
-        }),
-        new CssMinimizerPlugin(),
-      ],
+      minimizer: reacteaConfig.minimizers,
     },
     module: {
       strictExportPresence: true,
@@ -132,6 +140,18 @@ export function compileConfig(reacteaConfig: ReacteaConfig) {
           // back to the "file" loader at the end of the loader list.
           oneOf: [
             ...reacteaConfig.oneOf,
+            // "url" loader works like "file" loader except that it embeds assets
+            // smaller than specified limit in bytes as data URLs to avoid requests.
+            // A missing `test` is equivalent to a match.
+            {
+              test: [/\.bmp$/, /\.gif$/, /\.jpe?g$/, /\.png$/, /\.avif$/],
+              type: "asset",
+              parser: {
+                dataUrlCondition: {
+                  maxSize: imageInlineSizeLimit,
+                },
+              },
+            },
             // "file" loader makes sure those assets get served by WebpackDevServer.
             // When you `import` an asset, you get its (virtual) filename.
             // In production, they would get copied to the `build` folder.
