@@ -13,6 +13,7 @@
     "./css": "./dist/css.js",
     "./js": "./dist/js.js",
     "./svg": "./dist/svg.js",
+    "./core": "./dist/core.js",
     "./css-loader": {
       "types": "./css-loader.d.ts"
     }
