@@ -6,14 +6,18 @@ import { join } from "node:path";
 import InlineChunkHtmlPlugin from "react-dev-utils/InlineChunkHtmlPlugin.js";
 import InterpolateHtmlPlugin from "react-dev-utils/InterpolateHtmlPlugin.js";
 
-export default function htmlConfig() {
+export default function htmlConfig(htmlFiles: string[] = ["index.html"]) {
   return createConfig({
     plugins: [
       // Generates an `index.html` file with the <script> injected.
-      new HtmlWebpackPlugin({
-        inject: true,
-        template: join(appDir, "public", "index.html"),
-      }),
+      ...htmlFiles.map(
+        (html) =>
+          new HtmlWebpackPlugin({
+            inject: true,
+            filename: html,
+            template: join(appDir, "public", "index.html"),
+          })
+      ),
       // Inlines the webpack runtime script. This script is too small to warrant
       // a network request.
       // https://github.com/facebook/create-react-app/issues/5358
