@@ -1,5 +1,4 @@
-import { isDevelopment, shouldInlineRuntimeChunk } from "./base.js";
-import { appDir } from "./consts.js";
+import { isDevelopment, shouldInlineRuntimeChunk, appDir } from "./consts.js";
 import { envRaw } from "./env.js";
 import { createConfig } from "./index.js";
 import HtmlWebpackPlugin from "html-webpack-plugin";

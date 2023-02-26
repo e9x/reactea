@@ -1,5 +1,9 @@
-import { emitErrorsAsWarnings, isDevelopment, shouldLint } from "./base";
-import { appDir } from "./consts.js";
+import {
+  emitErrorsAsWarnings,
+  isDevelopment,
+  shouldLint,
+  appDir,
+} from "./consts.js";
 import { envRawStringified } from "./env.js";
 import { createConfig } from "./index.js";
 import CaseSensitivePathsPlugin from "@umijs/case-sensitive-paths-webpack-plugin";

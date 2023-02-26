@@ -4,8 +4,9 @@ import {
   isDevelopment,
   isEnvProductionProfile,
   shouldUseSourceMap,
-} from "./base.js";
-import { appDir, entryPoint } from "./consts.js";
+  appDir,
+  entryPoint,
+} from "./consts.js";
 import { envRawHash } from "./env.js";
 import { createRequire } from "node:module";
 import { join } from "node:path";

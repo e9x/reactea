@@ -1,6 +1,5 @@
 import type { CSSLoaderOptions } from "../css-loader.js";
-import { isDevelopment, shouldUseSourceMap } from "./base.js";
-import { appDir } from "./consts.js";
+import { isDevelopment, shouldUseSourceMap, appDir } from "./consts.js";
 import type { ReacteaConfig } from "./index.js";
 import { createConfig } from "./index.js";
 import CssMinimizerPlugin from "css-minimizer-webpack-plugin";

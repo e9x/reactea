@@ -3,8 +3,8 @@ import {
   shouldLint,
   shouldUseReactRefresh,
   shouldUseSourceMap,
-} from "./base.js";
-import { appDir } from "./consts.js";
+  appDir,
+} from "./consts.js";
 import { createConfig } from "./index.js";
 import ReactRefreshWebpackPlugin from "@pmmmwh/react-refresh-webpack-plugin";
 import type { JsMinifyOptions } from "@swc/core";
