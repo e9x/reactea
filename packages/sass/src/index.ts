@@ -1,7 +1,7 @@
 import type { ReacteaConfig } from "@reactea/config";
 import { createConfig } from "@reactea/config";
 import { shouldUseSourceMap } from "@reactea/config/consts";
-import { getStyleLoaders } from "@reactea/config/css";
+import { getStyleLoaders } from "@reactea/core/css";
 import { createRequire } from "node:module";
 import getCSSModuleLocalIdent from "react-dev-utils/getCSSModuleLocalIdent.js";
 
