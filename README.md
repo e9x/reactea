@@ -2,6 +2,8 @@
 
 React with a cup of tea.
 
+<img src="./docs/tea.png" width="250" height="250">
+
 ## Usage
 
 ```sh
