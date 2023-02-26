@@ -2,23 +2,18 @@ import "webpack-dev-server";
 import { appDir } from "./consts.js";
 import cssConfig from "./css.js";
 import { envRaw, envRawStringified } from "./env.js";
+import htmlConfig from "./html.js";
 import { createConfig, extendConfig } from "./index.js";
 import jsConfig from "./js.js";
 import svgConfig from "./svg.js";
 import CaseSensitivePathsPlugin from "@umijs/case-sensitive-paths-webpack-plugin";
 import { CleanWebpackPlugin } from "clean-webpack-plugin";
 import ESLintWebpackPlugin from "eslint-webpack-plugin";
-import HtmlWebpackPlugin from "html-webpack-plugin";
-import { createRequire } from "node:module";
 import { join, resolve } from "node:path";
-import InlineChunkHtmlPlugin from "react-dev-utils/InlineChunkHtmlPlugin.js";
-import InterpolateHtmlPlugin from "react-dev-utils/InterpolateHtmlPlugin.js";
 import ModuleNotFoundPlugin from "react-dev-utils/ModuleNotFoundPlugin.js";
 import formatter from "react-dev-utils/eslintFormatter.js";
 import webpack from "webpack";
 import { BundleAnalyzerPlugin } from "webpack-bundle-analyzer";
-
-const require = createRequire(import.meta.url);
 
 export const shouldLint = process.env.DISABLE_LINT !== "true";
 
@@ -50,23 +45,6 @@ export default function baseConfig() {
     plugins: [
       // unused assets
       new CleanWebpackPlugin(),
-      // Generates an `index.html` file with the <script> injected.
-      new HtmlWebpackPlugin({
-        inject: true,
-        template: join(appDir, "public", "index.html"),
-      }),
-      // Inlines the webpack runtime script. This script is too small to warrant
-      // a network request.
-      // https://github.com/facebook/create-react-app/issues/5358
-      ...(!isDevelopment && shouldInlineRuntimeChunk
-        ? [new InlineChunkHtmlPlugin(HtmlWebpackPlugin, [/runtime-.+[.]js/])]
-        : []),
-      // Makes some environment variables available in index.html.
-      // The public URL is available as %PUBLIC_URL% in index.html, e.g.:
-      // <link rel="icon" href="%PUBLIC_URL%/favicon.ico">
-      // It will be an empty string unless you specify "homepage"
-      // in `package.json`, in which case it will be the pathname of that U
-      new InterpolateHtmlPlugin(HtmlWebpackPlugin, envRaw),
       // This gives some necessary context to module not found errors, such as
       // the requesting resource.
       new ModuleNotFoundPlugin(resolve(".")),
@@ -110,6 +88,7 @@ export default function baseConfig() {
     ],
   });
 
+  extendConfig(config, htmlConfig());
   extendConfig(config, jsConfig());
   extendConfig(config, svgConfig());
   extendConfig(config, cssConfig());
