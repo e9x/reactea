@@ -7,7 +7,7 @@ React with a cup of tea.
 ## Usage
 
 ```sh
-npm install -D @reactea/base cross-env webpack webpack-cli
+npm install -D @reactea/core cross-env webpack webpack-cli
 ```
 
 `package.json`
@@ -23,7 +23,7 @@ npm install -D @reactea/base cross-env webpack webpack-cli
 
 ```js
 import { compileConfig, createConfig, extendConfig } from "@reactea/config";
-import baseConfig from "@reactea/config/base";
+import baseConfig from "@reactea/core";
 
 const reactea = createConfig();
 
@@ -45,7 +45,7 @@ npm install -D @reactea/sass
 
 ```js
 import { compileConfig, createConfig, extendConfig } from "@reactea/config";
-import baseConfig from "@reactea/config/base";
+import baseConfig from "@reactea/core";
 import sassConfig from "@reactea/sass";
 
 const reactea = createConfig();
