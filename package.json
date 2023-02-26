@@ -3,8 +3,22 @@
   "version": "1.0.0",
   "description": "React with a cup of tea.",
   "license": "ISC",
+  "scripts": {
+    "watch": "concurrently 'npm:watch-*'",
+    "watch-config": "cd packages/config && npm run watch",
+    "watch-core": "cd packages/core && npm run watch",
+    "watch-sass": "cd packages/sass && npm run watch",
+    "build": "concurrently 'npm:watch-*'",
+    "build-config": "cd packages/config && npm run build",
+    "build-core": "cd packages/core && npm run build",
+    "build-sass": "cd packages/sass && npm run build"
+  },
   "workspaces": [
+    "packages/core",
     "packages/config",
     "packages/sass"
-  ]
+  ],
+  "devDependencies": {
+    "concurrently": "^7.6.0"
+  }
 }
