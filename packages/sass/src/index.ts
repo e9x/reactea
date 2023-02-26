@@ -1,4 +1,5 @@
-import { createConfig, ReacteaConfig } from "@reactea/config";
+import type { ReacteaConfig } from "@reactea/config";
+import { createConfig } from "@reactea/config";
 import { shouldUseSourceMap } from "@reactea/config/base";
 import { getStyleLoaders } from "@reactea/config/css";
 import { createRequire } from "node:module";

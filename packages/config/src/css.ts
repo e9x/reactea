@@ -1,7 +1,8 @@
 import type { CSSLoaderOptions } from "../css-loader.js";
 import { isDevelopment, shouldUseSourceMap } from "./base.js";
 import { appDir } from "./consts.js";
-import { createConfig, ReacteaConfig } from "./index.js";
+import type { ReacteaConfig } from "./index.js";
+import { createConfig } from "./index.js";
 import CssMinimizerPlugin from "css-minimizer-webpack-plugin";
 import MiniCssExtractPlugin from "mini-css-extract-plugin";
 import { createRequire } from "node:module";
