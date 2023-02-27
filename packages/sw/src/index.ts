@@ -1,11 +1,11 @@
 import type { ReacteaConfig } from "@reactea/config";
 import { createConfig } from "@reactea/config";
-import { appDir, resolveModule } from "@reactea/config/consts";
+import { resolveModule, srcDir } from "@reactea/config/consts";
 import { join } from "node:path";
 import { InjectManifest } from "workbox-webpack-plugin";
 
 export default async function swConfig(): Promise<ReacteaConfig> {
-  const swSrc = await resolveModule(join(appDir, "src", "service-worker"));
+  const swSrc = await resolveModule(join(srcDir, "service-worker"));
 
   if (!swSrc) throw new TypeError("Couldn't find src/service-worker script.");
 

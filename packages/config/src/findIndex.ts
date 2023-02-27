@@ -43,7 +43,7 @@ export default async function findEntryPoint(dir: string) {
     if ((err as NodeJS.ErrnoException).code !== "ENOENT") throw err;
   }
 
-  const m = resolveModule(join(dir, "src", "index"));
+  const m = resolveModule(join(dir, "index"));
 
   if (m) return m;
 

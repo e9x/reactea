@@ -3,6 +3,7 @@ import {
   shouldUseSourceMap,
   appDir,
   entryPoint,
+  distDir,
 } from "./consts.js";
 import { envRawHash } from "./env.js";
 import type { CSSLoader, PostCSSPlugin } from "./postcss.js";
@@ -103,7 +104,7 @@ export function compileConfig(
     entry: entryPoint,
     output: {
       // The build folder.
-      path: join(appDir, "dist"),
+      path: distDir,
       // Add /* filename */ comments to generated require()s in the output.
       pathinfo: isDevelopment,
       // There will be one main bundle, and one file per asynchronous chunk.

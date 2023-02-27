@@ -1,8 +1,7 @@
 import type { CSSLoaderOptions } from "../css-loader.js";
-import { appDir, isDevelopment, shouldUseSourceMap } from "./consts.js";
+import { isDevelopment, shouldUseSourceMap, srcDir } from "./consts.js";
 import MiniCssExtractPlugin from "mini-css-extract-plugin";
 import { createRequire } from "node:module";
-import { resolve } from "node:path";
 import type { RuleSetRule } from "webpack";
 
 const require = createRequire(import.meta.url);
@@ -80,7 +79,7 @@ function getStyleLoaders(
         loader: require.resolve("resolve-url-loader"),
         options: {
           sourceMap: shouldUseSourceMap,
-          root: resolve("src", appDir),
+          root: srcDir,
         },
       },
       preProcessor

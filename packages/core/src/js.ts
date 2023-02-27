@@ -8,11 +8,11 @@ import {
   appDir,
   isEnvProductionProfile,
   moduleFileExtensions,
+  srcDir,
 } from "@reactea/config/consts";
 import type { JsMinifyOptions } from "@swc/core";
 import ForkTsCheckerWebpackPlugin from "fork-ts-checker-webpack-plugin";
 import { createRequire } from "node:module";
-import { join } from "node:path";
 import TerserPlugin from "terser-webpack-plugin";
 
 const require = createRequire(import.meta.url);
@@ -24,7 +24,7 @@ export default function jsConfig() {
       // The preset includes JSX, Flow, TypeScript, and some ESnext features.
       {
         test: /\.[mc]?[jt]sx?$/,
-        include: join(appDir, "src"),
+        include: srcDir,
         loader: require.resolve("swc-loader"),
         options: {
           sourceMaps: shouldUseSourceMap,

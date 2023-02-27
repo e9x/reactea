@@ -34,4 +34,4 @@ export const srcDir = join(appDir, "src");
 
 export const distDir = join(appDir, "dist");
 
-export const entryPoint = await findEntryPoint(appDir);
+export const entryPoint = await findEntryPoint(srcDir);
