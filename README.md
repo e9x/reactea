@@ -69,13 +69,12 @@ npm install -D @reactea/tailwind
 ```js
 import { compileConfig, createConfig, extendConfig } from "@reactea/config";
 import baseConfig from "@reactea/core";
-import loadTailwind from "@reactea/tailwind";
+import tailwindConfig from "@reactea/tailwind";
 
 const reactea = createConfig();
 
 extendConfig(reactea, baseConfig());
-// called after all extensions
-loadTailwind(reactea);
+extendConfig(reactea, tailwindConfig());
 
 const config = compileConfig(reactea);
 
