@@ -1,6 +1,6 @@
 {
   "name": "@reactea/sass",
-  "version": "1.0.0",
+  "version": "1.0.0-alpha",
   "description": "SASS/SCSS support for Reactea.",
   "author": "",
   "license": "ISC",
@@ -14,8 +14,8 @@
     "dist"
   ],
   "dependencies": {
-    "@reactea/config": "^1.0.0",
-    "@reactea/core": "^1.0.0",
+    "@reactea/config": "1.0.0-alpha",
+    "@reactea/core": "1.0.0-alpha",
     "react-dev-utils": "^12.0.1",
     "sass": "^1.58.3",
     "sass-loader": "^13.2.0"

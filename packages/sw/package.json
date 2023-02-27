@@ -1,6 +1,6 @@
 {
   "name": "@reactea/sw",
-  "version": "1.0.0",
+  "version": "1.0.0-alpha",
   "description": "Google Workbox support for Reactea.",
   "author": "",
   "license": "ISC",
@@ -14,8 +14,8 @@
     "dist"
   ],
   "dependencies": {
-    "@reactea/config": "^1.0.0",
-    "@reactea/core": "^1.0.0",
+    "@reactea/config": "1.0.0-alpha",
+    "@reactea/core": "1.0.0-alpha",
     "workbox-webpack-plugin": "^6.5.4"
   },
   "devDependencies": {
