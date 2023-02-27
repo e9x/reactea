@@ -26,7 +26,7 @@ export default function sassConfig(): ReacteaConfig {
           },
         },
         preProcessor: {
-          loader: "sass-loader",
+          loader: require.resolve("sass-loader"),
           options: {
             implementation: require.resolve("sass"),
             sourceMap: true,
@@ -51,7 +51,7 @@ export default function sassConfig(): ReacteaConfig {
           },
         },
         preProcessor: {
-          loader: "sass-loader",
+          loader: require.resolve("sass-loader"),
           options: {
             implementation: require.resolve("sass"),
             sourceMap: true,
