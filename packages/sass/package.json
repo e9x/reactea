@@ -3,6 +3,11 @@
   "version": "1.0.0-alpha",
   "description": "SASS/SCSS support for Reactea.",
   "author": "",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/e9x/reactea.git"
+  },
+  "homepage": "https://github.com/e9x/reactea/tree/master/packages/sass",
   "license": "ISC",
   "main": "dist/index.js",
   "type": "module",
