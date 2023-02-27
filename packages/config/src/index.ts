@@ -88,7 +88,7 @@ export function extendConfig(config: ReacteaConfig, extension: ReacteaConfig) {
 
 export function compileConfig(reacteaConfig: ReacteaConfig) {
   const config: Configuration = {
-    target: "web",
+    target: "browserslist",
     devServer: {
       port: 3000,
       // https://webpack.js.org/configuration/dev-server/#devserverhistoryapifallback
