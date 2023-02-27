@@ -5,7 +5,6 @@ import {
   shouldLint,
   shouldUseReactRefresh,
   shouldUseSourceMap,
-  appDir,
   isEnvProductionProfile,
   moduleFileExtensions,
   srcDir,
