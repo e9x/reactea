@@ -1,4 +1,3 @@
-import "webpack-dev-server";
 import {
   isDevelopment,
   shouldUseSourceMap,
@@ -16,6 +15,7 @@ import type {
   Compiler,
   WebpackPluginInstance,
 } from "webpack";
+import type { Configuration as DevServerConfiguration } from "webpack-dev-server";
 
 const require = createRequire(import.meta.url);
 
@@ -79,7 +79,10 @@ export function extendConfig(config: ReacteaConfig, extension: ReacteaConfig) {
   config.resolve.extensions.push(...extension.resolve.extensions);
 }
 
-export function compileConfig(reacteaConfig: ReacteaConfig) {
+export function compileConfig(
+  reacteaConfig: ReacteaConfig,
+  devServer: DevServerConfiguration = {}
+) {
   const config: Configuration = {
     target: "browserslist",
     devServer: {
@@ -87,6 +90,7 @@ export function compileConfig(reacteaConfig: ReacteaConfig) {
       // https://webpack.js.org/configuration/dev-server/#devserverhistoryapifallback
       // to test 404 pages
       historyApiFallback: true,
+      ...devServer,
     },
     // Webpack noise constrained to errors and warnings
     // stats: 'errors-warnings',
