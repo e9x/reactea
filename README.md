@@ -35,7 +35,7 @@ const config = compileConfig(reactea);
 export default config;
 ```
 
-With SCSS support:
+With SASS support:
 
 ```sh
 npm install -D @reactea/sass
