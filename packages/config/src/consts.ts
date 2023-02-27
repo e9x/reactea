@@ -1,5 +1,6 @@
 import { envRaw } from "./env.js";
 import findEntryPoint from "./findIndex.js";
+import { join } from "node:path";
 import { cwd } from "node:process";
 
 export { moduleFileExtensions, resolveModule } from "./findIndex.js";
@@ -26,5 +27,11 @@ export const isEnvProductionProfile =
 export const shouldUseReactRefresh = envRaw.FAST_REFRESH;
 
 export const appDir = cwd();
+
+export const publicDir = join(appDir, "public");
+
+export const srcDir = join(appDir, "src");
+
+export const distDir = join(appDir, "dist");
 
 export const entryPoint = await findEntryPoint(appDir);
