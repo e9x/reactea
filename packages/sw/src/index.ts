@@ -9,8 +9,6 @@ export default async function swConfig(): Promise<ReacteaConfig> {
 
   if (!swSrc) throw new TypeError("Couldn't find src/service-worker script.");
 
-  console.log(swSrc);
-
   return createConfig({
     plugins: [
       new InjectManifest({
