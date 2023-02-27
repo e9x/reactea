@@ -1,30 +1,10 @@
-import type { CSSLoaderOptions } from "../css-loader.js";
 import type { ReacteaConfig } from "@reactea/config";
 import { createConfig } from "@reactea/config";
-import {
-  isDevelopment,
-  shouldUseSourceMap,
-  appDir,
-} from "@reactea/config/consts";
+import { isDevelopment, shouldUseSourceMap } from "@reactea/config/consts";
 import CssMinimizerPlugin from "css-minimizer-webpack-plugin";
 import MiniCssExtractPlugin from "mini-css-extract-plugin";
 import { createRequire } from "node:module";
-import { resolve } from "node:path";
 import getCSSModuleLocalIdent from "react-dev-utils/getCSSModuleLocalIdent.js";
-import type { RuleSetRule, RuleSetUseItem } from "webpack";
-
-export type PostCSSLoader = ReturnType<typeof getPostCSSLoader>;
-
-export const postCSSLoaders = new Set<RuleSetUseItem>();
-
-/**
- * Used to easily differentiate PostCSS loaders for hooking
- */
-export function isPostCSSLoader(
-  loader: RuleSetUseItem
-): loader is PostCSSLoader {
-  return postCSSLoaders.has(loader);
-}
 
 const require = createRequire(import.meta.url);
 
@@ -32,53 +12,9 @@ const require = createRequire(import.meta.url);
 const cssRegex = /\.css$/;
 const cssModuleRegex = /\.module\.css$/;
 
-// common function to get style loaders
-export const getStyleLoaders = (
-  cssOptions: CSSLoaderOptions,
-  preProcessor?: RuleSetRule
-) => {
-  const loaders: RuleSetRule[] = [
-    ...(isDevelopment
-      ? [
-          {
-            loader: require.resolve("style-loader"),
-          },
-        ]
-      : []),
-    ...(!isDevelopment
-      ? [
-          {
-            loader: MiniCssExtractPlugin.loader,
-            // css is located in `static/css`, use '../../' to locate index.html folder
-            // in production `paths.publicUrlOrPath` can be a relative path
-          },
-        ]
-      : []),
-    {
-      loader: require.resolve("css-loader"),
-      options: cssOptions,
-    },
-    getPostCSSLoader(),
-  ];
-
-  if (preProcessor) {
-    loaders.push(
-      {
-        loader: require.resolve("resolve-url-loader"),
-        options: {
-          sourceMap: shouldUseSourceMap,
-          root: resolve("src", appDir),
-        },
-      },
-      preProcessor
-    );
-  }
-  return loaders as (RuleSetRule | string)[];
-};
-
 export default function cssConfig(): ReacteaConfig {
   return createConfig({
-    oneOf: [
+    cssLoaders: [
       // "postcss" loader applies autoprefixer to our CSS.
       // "css" loader resolves paths in CSS and adds assets as dependencies.
       // "style" loader turns CSS into JS modules that inject <style> tags.
@@ -89,13 +25,13 @@ export default function cssConfig(): ReacteaConfig {
       {
         test: cssRegex,
         exclude: cssModuleRegex,
-        use: getStyleLoaders({
+        cssOptions: {
           importLoaders: 1,
           sourceMap: shouldUseSourceMap,
           modules: {
             mode: "icss",
           },
-        }),
+        },
         // Don't consider CSS imports dead code even if the
         // containing package claims to have no side effects.
         // Remove this when webpack adds a warning or an error for this.
@@ -106,15 +42,31 @@ export default function cssConfig(): ReacteaConfig {
       // using the extension .module.css
       {
         test: cssModuleRegex,
-        use: getStyleLoaders({
+        cssOptions: {
           importLoaders: 1,
           sourceMap: shouldUseSourceMap,
           modules: {
             mode: "local",
             getLocalIdent: getCSSModuleLocalIdent,
           },
-        }),
+        },
       },
+    ],
+    postCSSPlugins: [
+      require.resolve("postcss-flexbugs-fixes"),
+      [
+        require.resolve("postcss-preset-env"),
+        {
+          autoprefixer: {
+            flexbox: "no-2009",
+          },
+          stage: 3,
+        },
+      ],
+      // Adds PostCSS Normalize as the reset css with default options,
+      // so that it honors browserslist config in package.json
+      // which in turn let's users customize the target behavior as per their needs.
+      "postcss-normalize",
     ],
     plugins: [
       ...(!isDevelopment
@@ -130,42 +82,4 @@ export default function cssConfig(): ReacteaConfig {
     ],
     minimizers: [new CssMinimizerPlugin()],
   });
-}
-
-export function getPostCSSLoader() {
-  const loader = {
-    // Options for PostCSS as we reference these options twice
-    // Adds vendor prefixing based on your specified browser support in
-    // package.json
-    loader: "postcss-loader",
-    options: {
-      postcssOptions: {
-        // Necessary for external CSS imports to work
-        // https://github.com/facebook/create-react-app/issues/2677
-        ident: "postcss",
-        config: false,
-        plugins: [
-          "postcss-flexbugs-fixes",
-          [
-            "postcss-preset-env",
-            {
-              autoprefixer: {
-                flexbox: "no-2009",
-              },
-              stage: 3,
-            },
-          ],
-          // Adds PostCSS Normalize as the reset css with default options,
-          // so that it honors browserslist config in package.json
-          // which in turn let's users customize the target behavior as per their needs.
-          "postcss-normalize",
-        ],
-      },
-      sourceMap: shouldUseSourceMap,
-    },
-  };
-
-  postCSSLoaders.add(loader);
-
-  return loader;
 }
