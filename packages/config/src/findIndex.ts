@@ -1,20 +1,33 @@
 import { access, readFile } from "node:fs/promises";
 import { join, resolve } from "node:path";
 
-const indexes = [
-  "index.js",
-  "index.jsx",
-  "index.cjs",
-  "index.cjsx",
-  "index.mjs",
-  "index.mjsx",
-  "index.ts",
-  "index.tsx",
-  "index.mts",
-  "index.mtsx",
-  "index.cts",
-  "index.ctsx",
+export const moduleFileExtensions: string[] = [
+  ".js",
+  ".jsx",
+  ".cjs",
+  ".cjsx",
+  ".mjs",
+  ".mjsx",
+  ".ts",
+  ".tsx",
+  ".mts",
+  ".mtsx",
+  ".cts",
+  ".ctsx",
 ];
+
+export async function resolveModule(filePath: string) {
+  for (const ext of moduleFileExtensions) {
+    const full = `${filePath}${ext}`;
+
+    try {
+      await access(full);
+      return full;
+    } catch (err) {
+      if ((err as NodeJS.ErrnoException).code !== "ENOENT") throw err;
+    }
+  }
+}
 
 export default async function findEntryPoint(dir: string) {
   try {
@@ -30,16 +43,9 @@ export default async function findEntryPoint(dir: string) {
     if ((err as NodeJS.ErrnoException).code !== "ENOENT") throw err;
   }
 
-  for (const index of indexes) {
-    const path = join(dir, "src", index);
+  const m = resolveModule(join(dir, "src", "index"));
 
-    try {
-      await access(path);
-      return path;
-    } catch (err) {
-      if ((err as NodeJS.ErrnoException).code !== "ENOENT") throw err;
-    }
-  }
+  if (m) return m;
 
   throw new Error("Cannot find entry point for your application.");
 }

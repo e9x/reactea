@@ -7,6 +7,7 @@ import {
   shouldUseSourceMap,
   appDir,
   isEnvProductionProfile,
+  moduleFileExtensions,
 } from "@reactea/config/consts";
 import type { JsMinifyOptions } from "@swc/core";
 import ForkTsCheckerWebpackPlugin from "fork-ts-checker-webpack-plugin";
@@ -99,19 +100,7 @@ export default function jsConfig() {
             ]
           : []),
       ],
-      extensions: [
-        ".web.mjs",
-        ".mjs",
-        ".web.js",
-        ".js",
-        ".web.ts",
-        ".ts",
-        ".web.tsx",
-        ".tsx",
-        ".json",
-        ".web.jsx",
-        ".jsx",
-      ],
+      extensions: moduleFileExtensions,
     },
   });
 }
