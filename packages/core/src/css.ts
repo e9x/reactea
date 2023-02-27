@@ -11,7 +11,20 @@ import MiniCssExtractPlugin from "mini-css-extract-plugin";
 import { createRequire } from "node:module";
 import { resolve } from "node:path";
 import getCSSModuleLocalIdent from "react-dev-utils/getCSSModuleLocalIdent.js";
-import type { RuleSetRule } from "webpack";
+import type { RuleSetRule, RuleSetUseItem } from "webpack";
+
+export type PostCSSLoader = ReturnType<typeof getPostCSSLoader>;
+
+export const postCSSLoaders = new Set<RuleSetUseItem>();
+
+/**
+ * Used to easily differentiate PostCSS loaders for hooking
+ */
+export function isPostCSSLoader(
+  loader: RuleSetUseItem
+): loader is PostCSSLoader {
+  return postCSSLoaders.has(loader);
+}
 
 const require = createRequire(import.meta.url);
 
@@ -45,37 +58,7 @@ export const getStyleLoaders = (
       loader: require.resolve("css-loader"),
       options: cssOptions,
     },
-    {
-      // Options for PostCSS as we reference these options twice
-      // Adds vendor prefixing based on your specified browser support in
-      // package.json
-      loader: "postcss-loader",
-      options: {
-        postcssOptions: {
-          // Necessary for external CSS imports to work
-          // https://github.com/facebook/create-react-app/issues/2677
-          ident: "postcss",
-          config: false,
-          plugins: [
-            "postcss-flexbugs-fixes",
-            [
-              "postcss-preset-env",
-              {
-                autoprefixer: {
-                  flexbox: "no-2009",
-                },
-                stage: 3,
-              },
-            ],
-            // Adds PostCSS Normalize as the reset css with default options,
-            // so that it honors browserslist config in package.json
-            // which in turn let's users customize the target behavior as per their needs.
-            "postcss-normalize",
-          ],
-        },
-        sourceMap: shouldUseSourceMap,
-      },
-    },
+    getPostCSSLoader(),
   ];
 
   if (preProcessor) {
@@ -147,4 +130,42 @@ export default function cssConfig(): ReacteaConfig {
     ],
     minimizers: [new CssMinimizerPlugin()],
   });
+}
+
+export function getPostCSSLoader() {
+  const loader = {
+    // Options for PostCSS as we reference these options twice
+    // Adds vendor prefixing based on your specified browser support in
+    // package.json
+    loader: "postcss-loader",
+    options: {
+      postcssOptions: {
+        // Necessary for external CSS imports to work
+        // https://github.com/facebook/create-react-app/issues/2677
+        ident: "postcss",
+        config: false,
+        plugins: [
+          "postcss-flexbugs-fixes",
+          [
+            "postcss-preset-env",
+            {
+              autoprefixer: {
+                flexbox: "no-2009",
+              },
+              stage: 3,
+            },
+          ],
+          // Adds PostCSS Normalize as the reset css with default options,
+          // so that it honors browserslist config in package.json
+          // which in turn let's users customize the target behavior as per their needs.
+          "postcss-normalize",
+        ],
+      },
+      sourceMap: shouldUseSourceMap,
+    },
+  };
+
+  postCSSLoaders.add(loader);
+
+  return loader;
 }

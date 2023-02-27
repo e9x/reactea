@@ -57,3 +57,27 @@ const config = compileConfig(reactea);
 
 export default config;
 ```
+
+With Tailwind support:
+
+```sh
+npm install -D @reactea/tailwind
+```
+
+`webpack.config.mjs`
+
+```js
+import { compileConfig, createConfig, extendConfig } from "@reactea/config";
+import baseConfig from "@reactea/core";
+import loadTailwind from "@reactea/tailwind";
+
+const reactea = createConfig();
+
+extendConfig(reactea, baseConfig());
+// called after all extensions
+loadTailwind(reactea);
+
+const config = compileConfig(reactea);
+
+export default config;
+```

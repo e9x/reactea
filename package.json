@@ -8,15 +8,18 @@
     "watch-config": "cd packages/config && npm run watch",
     "watch-core": "cd packages/core && npm run watch",
     "watch-sass": "cd packages/sass && npm run watch",
+    "watch-tailwind": "cd packages/tailwind && npm run watch",
     "build": "concurrently 'npm:watch-*'",
     "build-config": "cd packages/config && npm run build",
     "build-core": "cd packages/core && npm run build",
-    "build-sass": "cd packages/sass && npm run build"
+    "build-sass": "cd packages/sass && npm run build",
+    "build-tailwind": "cd packages/tailwind && npm run build"
   },
   "workspaces": [
     "packages/core",
     "packages/config",
-    "packages/sass"
+    "packages/sass",
+    "packages/tailwind"
   ],
   "devDependencies": {
     "concurrently": "^7.6.0"
