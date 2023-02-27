@@ -2,7 +2,7 @@ import { envRaw } from "./env.js";
 import findEntryPoint from "./findIndex.js";
 import { cwd } from "node:process";
 
-export { moduleFileExtensions } from "./findIndex.js";
+export { moduleFileExtensions, resolveModule } from "./findIndex.js";
 
 export const shouldLint = process.env.DISABLE_LINT !== "true";
 

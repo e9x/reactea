@@ -43,7 +43,7 @@ export default function jsConfig() {
               },
             },
             target: "es2015",
-            externalHelpers: true,
+            externalHelpers: false,
           },
         },
       },
@@ -58,7 +58,7 @@ export default function jsConfig() {
           sourceMaps: shouldUseSourceMap,
           jsc: {
             target: "es2015",
-            externalHelpers: true,
+            externalHelpers: false,
           },
         },
       },
