@@ -14,6 +14,8 @@ npm install --save-dev @reactea/sass
 
 In your `webpack.config.js` file, import `@reactea/sass` and call the default export function to obtain the configuration for SASS.
 
+webpack.config.js:
+
 ```js
 import { compileConfig, createConfig, extendConfig } from "@reactea/config";
 import sassConfig from "@reactea/sass";
@@ -26,4 +28,10 @@ extendConfig(reactea, sassConfig());
 const config = compileConfig(reactea);
 
 export default config;
+```
+
+src/react-app-env.d.ts:
+
+```ts
+/// <reference types="@reactea/sass/env" />
 ```
