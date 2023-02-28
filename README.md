@@ -1,6 +1,8 @@
-# Reactea
+# Reactea ☕
 
 Reactea is a monorepo containing a set of packages that allow developers to quickly set up a modern React project with Webpack.
+
+See [quickstart](./QUICKSTART.md) to begin migrating to Reactea.
 
 ## Packages
 
