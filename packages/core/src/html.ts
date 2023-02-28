@@ -10,16 +10,24 @@ import { join } from "node:path";
 import InlineChunkHtmlPlugin from "react-dev-utils/InlineChunkHtmlPlugin.js";
 import InterpolateHtmlPlugin from "react-dev-utils/InterpolateHtmlPlugin.js";
 
-export default function htmlConfig(htmlFiles: string[] = ["index.html"]) {
+/**
+ *
+ * @param htmlFiles key: filename, value: template path
+ */
+export default function htmlConfig(
+  htmlFiles: Record<string, string> = {
+    "index.html": join(appDir, "public", "index.html"),
+  }
+) {
   return createConfig({
     plugins: [
       // Generates an `index.html` file with the <script> injected.
-      ...htmlFiles.map(
-        (html) =>
+      ...Object.entries(htmlFiles).map(
+        ([filename, template]) =>
           new HtmlWebpackPlugin({
             inject: true,
-            filename: html,
-            template: join(appDir, "public", "index.html"),
+            filename,
+            template,
           })
       ),
       // Inlines the webpack runtime script. This script is too small to warrant
