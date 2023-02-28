@@ -15,7 +15,10 @@
     "./css": "./dist/css.js",
     "./js": "./dist/js.js",
     "./svg": "./dist/svg.js",
-    "./core": "./dist/core.js"
+    "./core": "./dist/core.js",
+    "./env": {
+      "types": "./env.d.ts"
+    }
   },
   "type": "module",
   "scripts": {
@@ -23,7 +26,9 @@
     "watch": "tsc --watch"
   },
   "files": [
-    "dist"
+    "dist",
+    "env",
+    "env.d.ts"
   ],
   "dependencies": {
     "@pmmmwh/react-refresh-webpack-plugin": "^0.5.10",

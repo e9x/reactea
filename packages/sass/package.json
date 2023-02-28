@@ -16,7 +16,8 @@
     "watch": "tsc --watch"
   },
   "files": [
-    "dist"
+    "dist",
+    "env.d.ts"
   ],
   "dependencies": {
     "@reactea/config": "1.0.0-alpha",
