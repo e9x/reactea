@@ -59,7 +59,7 @@ function getStyleLoaders(
       // Options for PostCSS as we reference these options twice
       // Adds vendor prefixing based on your specified browser support in
       // package.json
-      loader: "postcss-loader",
+      loader: require.resolve("postcss-loader"),
       options: {
         postcssOptions: {
           // Necessary for external CSS imports to work
