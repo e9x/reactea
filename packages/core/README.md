@@ -16,6 +16,8 @@ npm install --save-dev @reactea/core
 
 In your `webpack.config.js` file, import `@reactea/core` and call the default export function to obtain the base configuration.
 
+webpack.config.js:
+
 ```js
 import { createConfig, extendConfig } from "@reactea/config";
 import baseConfig from "@reactea/core/css";
@@ -27,6 +29,12 @@ export default function myConfig() {
 
   return config;
 }
+```
+
+src/react-app-env.d.ts:
+
+```ts
+/// <reference types="@reactea/core/env" />
 ```
 
 ## Configuration
@@ -46,7 +54,9 @@ These configurations can be extended or overridden via the `extendConfig` functi
 
 `@reactea/core/core` provides a configuration object for a basic Webpack configuration for a React application. It includes support for ESLint, process.env, and copying the `public` directory to the build output.
 
-```js
+myConfig.ts:
+
+```ts
 import { createConfig, extendConfig } from "@reactea/config";
 import coreConfig from "@reactea/core/core";
 
@@ -77,7 +87,9 @@ Note that `coreConfig` does not accept any parameters. If you need to customize 
 
 `@reactea/core/html` provides a configuration object for generating an HTML file with Webpack and injecting the appropriate script tags. By default, it generates an `index.html` file in the `public` directory, and injects the generated script tags. It also inlines the runtime chunk if the application is being built for production.
 
-```js
+myConfig.ts:
+
+```ts
 import { createConfig, extendConfig } from "@reactea/config";
 import htmlConfig from "@reactea/core/html";
 
@@ -99,7 +111,9 @@ export default function myBaseConfig() {
 
 `@reactea/core/js` provides a configuration object for processing JavaScript files with SWC and React Fast Refresh. By default, it includes support for TypeScript, JSX, Flow, and some ESnext features, and compiles application JS with SWC. It also includes experimental support for React Fast Refresh.
 
-```js
+myConfig.ts:
+
+```ts
 import { createConfig, extendConfig } from "@reactea/config";
 import jsConfig from "@reactea/core/js";
 
@@ -117,7 +131,9 @@ export default function myBaseConfig() {
 
 `@reactea/core/svg` provides a configuration object for processing SVG files with the `@svgr/webpack` loader. By default, it configures the loader to use the `@svgr/webpack` plugin to optimize SVG files and generate React components.
 
-```js
+myConfig.ts:
+
+```ts
 import { createConfig, extendConfig } from "@reactea/config";
 import svgConfig from "@reactea/core/svg";
 
@@ -135,7 +151,9 @@ export default function myBaseConfig() {
 
 `@reactea/core/css` provides a configuration object for processing CSS files with PostCSS and the appropriate loaders. By default, it includes support for importing CSS files and CSS modules.
 
-```js
+myConfig.ts:
+
+```ts
 import { createConfig, extendConfig } from "@reactea/config";
 import cssConfig from "@reactea/core/css";
 
@@ -153,7 +171,9 @@ export default function myBaseConfig() {
 
 `@reactea/core/image` provides a configuration object for processing image files with the `asset` loader. By default, it includes support for BMP, GIF, JPEG, PNG, and AVIF images, and embeds small images as data URLs to avoid requests.
 
-```js
+myConfig.ts:
+
+```ts
 import { createConfig, extendConfig } from "@reactea/config";
 import baseConfig from "@reactea/core";
 
