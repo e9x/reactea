@@ -1,6 +1,6 @@
 {
   "name": "@reactea/sw",
-  "version": "1.0.0-alpha",
+  "version": "1.0.0-alpha.1",
   "description": "Google Workbox support for Reactea.",
   "author": "",
   "repository": {
