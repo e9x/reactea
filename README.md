@@ -4,6 +4,8 @@ Reactea is a monorepo containing a set of packages that allow developers to quic
 
 See [quickstart](./QUICKSTART.md) to begin migrating to Reactea.
 
+See an example of Reactea at [my-reactea-app](https://github.com/e9x/my-reactea-app).
+
 ## Packages
 
 - [`@reactea/config`](./packages/config) - A set of utilities for creating and extending Webpack configurations.
