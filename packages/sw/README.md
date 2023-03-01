@@ -1,5 +1,7 @@
 # `@reactea/sw`
 
+<a href="https://www.npmjs.com/package/@reactea/sw"><img src="https://img.shields.io/npm/v/@reactea/sw.svg?maxAge=3600" alt="npm version" /></a>
+
 `@reactea/sw` is a Webpack configuration package that provides the basic configuration for a Service Worker in a Progressive Web Application (PWA). It is designed to be extendable and configurable via other `@reactea` packages.
 
 ### Installation

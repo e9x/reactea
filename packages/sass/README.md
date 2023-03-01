@@ -1,5 +1,7 @@
 # `@reactea/sass`
 
+<a href="https://www.npmjs.com/package/@reactea/sass"><img src="https://img.shields.io/npm/v/@reactea/sass.svg?maxAge=3600" alt="npm version" /></a>
+
 A plugin for `@reactea/config` that adds support for SASS stylesheets.
 
 This handles .module.scss, .module.sass, .scss, and .sass files.

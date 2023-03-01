@@ -1,5 +1,7 @@
 # `@reactea/tailwind`
 
+<a href="https://www.npmjs.com/package/@reactea/tailwind"><img src="https://img.shields.io/npm/v/@reactea/tailwind.svg?maxAge=3600" alt="npm version" /></a>
+
 This package provides a configuration function that can be used to integrate Tailwind CSS with `@reactea/config`.
 
 ## Usage

@@ -1,5 +1,7 @@
 # `@reactea/core`
 
+<a href="https://www.npmjs.com/package/@reactea/core"><img src="https://img.shields.io/npm/v/@reactea/core.svg?maxAge=3600" alt="npm version" /></a>
+
 `@reactea/core` is a Webpack configuration package that provides the basic configuration for a React application. It is designed to be extendable and configurable via other `@reactea` packages.
 
 Ideally, you'll only use `baseConfig` unless you're creating a custom base. Extensions should be compatible with `baseConfig`.

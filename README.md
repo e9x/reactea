@@ -1,5 +1,7 @@
 # Reactea ☕
 
+<a href="https://www.npmjs.com/package/@reactea/config"><img src="https://img.shields.io/npm/v/@reactea/config.svg?maxAge=3600" alt="npm version" /></a>
+
 Reactea is a monorepo containing a set of packages that allow developers to quickly set up a modern React project with Webpack.
 
 See [quickstart](./QUICKSTART.md) to begin migrating to Reactea.
