@@ -10,13 +10,14 @@ import {
   srcDir,
 } from "@reactea/config/consts";
 import type { JsMinifyOptions } from "@swc/core";
+import type { Rules } from "css-minimizer-webpack-plugin";
 import ForkTsCheckerWebpackPlugin from "fork-ts-checker-webpack-plugin";
 import { createRequire } from "node:module";
 import TerserPlugin from "terser-webpack-plugin";
 
 const require = createRequire(import.meta.url);
 
-export default function jsConfig() {
+export default function jsConfig(terserExclude?: Rules) {
   return createConfig({
     oneOf: [
       // Process application JS with SWC.
@@ -77,6 +78,7 @@ export default function jsConfig() {
     minimizers: [
       new TerserPlugin<JsMinifyOptions>({
         minify: TerserPlugin.swcMinify,
+        exclude: terserExclude,
       }),
     ],
     resolve: {
