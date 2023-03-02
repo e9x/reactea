@@ -19,11 +19,18 @@ import InterpolateHtmlPlugin from "react-dev-utils/InterpolateHtmlPlugin.js";
  * @param copyFilter Callback for CopyPlugin.
  */
 export default function htmlConfig(
-  htmlFiles: Record<string, string> = {
-    "index.html": join(publicDir, "index.html"),
-  },
-  copyFilter: Filter = (f) => f !== join(publicDir, "index.html")
+  options: {
+    htmlFiles?: Record<string, string>;
+    copyFilter?: Filter;
+  } = {}
 ) {
+  const htmlFiles = options.htmlFiles || {
+    "index.html": join(publicDir, "index.html"),
+  };
+
+  const copyFilter =
+    options.copyFilter || ((f) => f !== join(publicDir, "index.html"));
+
   return createConfig({
     plugins: [
       new CopyPlugin({
