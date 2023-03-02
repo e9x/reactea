@@ -4,13 +4,10 @@ import {
   isDevelopment,
   shouldLint,
   appDir,
-  publicDir,
-  distDir,
 } from "@reactea/config/consts";
 import { envRawStringified } from "@reactea/config/env";
 import CaseSensitivePathsPlugin from "@umijs/case-sensitive-paths-webpack-plugin";
 import { CleanWebpackPlugin } from "clean-webpack-plugin";
-import CopyPlugin from "copy-webpack-plugin";
 import ESLintWebpackPlugin from "eslint-webpack-plugin";
 import { join, resolve } from "node:path";
 import ModuleNotFoundPlugin from "react-dev-utils/ModuleNotFoundPlugin.js";
@@ -21,15 +18,6 @@ import { BundleAnalyzerPlugin } from "webpack-bundle-analyzer";
 export default function coreConfig() {
   return createConfig({
     plugins: [
-      new CopyPlugin({
-        patterns: [
-          {
-            from: publicDir,
-            to: distDir,
-            filter: (f) => f !== join(publicDir, "index.html"),
-          },
-        ],
-      }),
       // unused assets
       new CleanWebpackPlugin(),
       // This gives some necessary context to module not found errors, such as

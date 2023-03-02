@@ -2,9 +2,12 @@ import { createConfig } from "@reactea/config";
 import {
   isDevelopment,
   shouldInlineRuntimeChunk,
-  appDir,
+  publicDir,
+  distDir,
 } from "@reactea/config/consts";
 import { envRaw } from "@reactea/config/env";
+import type { Filter } from "copy-webpack-plugin";
+import CopyPlugin from "copy-webpack-plugin";
 import HtmlWebpackPlugin from "html-webpack-plugin";
 import { join } from "node:path";
 import InlineChunkHtmlPlugin from "react-dev-utils/InlineChunkHtmlPlugin.js";
@@ -13,14 +16,25 @@ import InterpolateHtmlPlugin from "react-dev-utils/InterpolateHtmlPlugin.js";
 /**
  *
  * @param htmlFiles key: filename, value: template path
+ * @param copyFilter Callback for CopyPlugin.
  */
 export default function htmlConfig(
   htmlFiles: Record<string, string> = {
-    "index.html": join(appDir, "public", "index.html"),
-  }
+    "index.html": join(publicDir, "index.html"),
+  },
+  copyFilter: Filter = (f) => f !== join(publicDir, "index.html")
 ) {
   return createConfig({
     plugins: [
+      new CopyPlugin({
+        patterns: [
+          {
+            from: publicDir,
+            to: distDir,
+            filter: copyFilter,
+          },
+        ],
+      }),
       // Generates an `index.html` file with the <script> injected.
       ...Object.entries(htmlFiles).map(
         ([filename, template]) =>
